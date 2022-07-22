@@ -2,18 +2,28 @@ const User = require("../models/User");
 const crypto = require("crypto");
 const ErrorResponse = require("../utlis/errorresponse");
 const sendEmail = require("../utlis/sendEmail");
+const catchAsyncerror = require("../utlis/catchAsyncerror");
+const jwt =require("jsonwebtoken");
 exports.register = async (req, res, next) => {
-  const { username, email, password, package } = req.body;
+  const { username, email, password, package,dob } = req.body;
+
+  if(password.length<6){
+    return res.status(400).json("password must be 6 character long")
+
+
+}
   try {
     User.findOne({ email }, async (err, user) => {
       if (user) {
         return next(new ErrorResponse("user already registed"), 400);
       } else {
+
         const user = await User.create({
           username,
           email,
           password,
           package,
+          dob
         });
         sendToken(user, 201, res);
       }
@@ -31,11 +41,11 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-      return next(new ErrorResponse("invalid credenti al", 401));
+      return res.status(401).json("invalid credenti al");
     }
     const isMatch = await user.matchPasswords(password);
     if (!isMatch) {
-      return next(new ErrorResponse("invalid credenti al", 401));
+      return  res.status(401).json("invalid credenti al");
     }
 
     sendToken(user, 200, res);
@@ -109,21 +119,41 @@ exports.resetPassword = async (req, res, next) => {
     next(err);
   }
 };
+exports.isAuthuser = async (req, res, next) => {
+  const  {token}  = req.cookies; 
+  console.log(token);
+  if (!token) {
+      return next(new ErrorResponse("plese login to access this resource", 401));
 
+  }
+  const decodedData = jwt.verify(token, process.env.JWT_SECRET)
+  req.user = await User.findById(decodedData.id);
+  next()
+}
 exports.dashboard = async (req, res, next) => {
-  const products = await User.findById(req.user._id);
+  const products = await User.findById(req.user.id);
   // const productCount = await Product.countDocuments()
   if (!products) {
-      return next(new Errorhandler("product not found", 404))
+      return next(new ErrorResponse("product not found", 404))
   }
   res.status(200).json({
       sucess: true,
       products,
       // productCount,
   })
+// console.log({token});
 };
+
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
-  res.status(statusCode).json({ success: true, token });
-};
+  // option for cookie
+  const options = {
+      expire: new Date(Date.now + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+      httpOnly: true
+  };
+  res.status(statusCode).cookie('token', token, options).json({
+      success: true,
+      user,
+      token,
+  })};

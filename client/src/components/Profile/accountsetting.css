@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+.box_one{
+    border-radius: 8px;
+    height: 312px;
+    width: 362px;
+    background-color: #fff;
+    padding: 15px;
+    margin-right: 25px;
+
+    
+}
+.box_one h1{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #0A0E0F;
+    font-family: 'Nunito', sans-serif;
+    padding-bottom: 24px;
+    
+}
+.col{
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color:#10867F;
+    font-family: 'Nunito', sans-serif;
+}
+.pic1{
+    display: flex;
+    justify-content: space-between;
+
+}
+.pic2{
+    display: flex;
+    justify-content: space-between;
+   
+
+}
+.pic3{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.pic4{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.pic5{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.img2{
+    padding: 8px;
+}
+
+h2{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color:#4E4F51;
+    font-family: 'Nunito', sans-serif;
+    list-style: none;
+    cursor: pointer;
+    padding:5px;
+}
+/******************* this is box two ******************/
+.flexbox{
+    display: flex;
+    margin: 150px;
+}
+.per_text{
+    font-family: 'Nunito Sans';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: #0A0E0F;
+}
+.box_two{
+    width: 710px;
+    height:365px;
+    background-color: #fff;
+    padding: 10px;
+}
+.cuttent_pass{
+    width: 660px;
+    height: 56px;
+    border-radius: 8px;
+    padding: 10px;
+    border: solid 2px grey;
+    margin: 10px;
+}
+.new_pass{
+    width: 660px;
+    height: 56px;
+    border-radius: 8px;
+    padding: 10px;
+    border: solid 2px grey;
+    margin: 10px;
+
+}
+.re_pass{
+    width: 660px;
+    height: 56px;
+    border-radius: 8px;
+    padding: 10px;
+    border: solid 2px grey;
+    margin: 10px;
+}
+.sav_btn{
+    background: #AEB2B9;
+    font-family: 'Nunito', sans-serif;
+    padding: 19px 24px 18px;
+    color: #fff;
+    width:100%;
+    height: 59px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 21px;
+    border-radius: 8px;
+    margin: 10px 0px 10px 0px;
+    border: none;
+}
