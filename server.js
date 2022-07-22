@@ -1,5 +1,5 @@
 const dotenv = require("dotenv");
-import path from"path"
+const path = require("path");
 dotenv.config({ path: "./config.env" });
 const express = require("express");
 const cookie = require("cookie-parser");
@@ -21,7 +21,6 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 
 //error handle
-const __dirname = path.resolve();
 
 // --------------------------deployment------------------------------
 if (process.env.NODE_ENV === "production") {
